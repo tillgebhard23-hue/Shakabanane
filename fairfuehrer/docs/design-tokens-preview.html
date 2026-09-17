@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Bric;src:url('../public/fonts/bricolage-grotesque.woff2') format('woff2');font-weight:200 800;font-display:swap}
+@font-face{font-family:SS3;src:url('../public/fonts/source-sans-3.woff2') format('woff2');font-weight:300 700;font-display:swap}
+:root{
+  --bg:#F8F6F2; --surface:#FFFDFA; --border:#E4DFD6;
+  --ink:#222824; --ink-muted:#5C645D;
+  --brand:#EF7B22; --brand-ink:#B5540C;
+  --green:#4F8A3D; --green-ink:#427334;
+  --sh-sm:0 1px 2px rgba(60,45,30,.06);
+  --sh-md:0 4px 16px rgba(60,45,30,.08);
+  --sh-lg:0 12px 32px rgba(60,45,30,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:SS3,system-ui,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:72px 32px 96px}
+h1{font-family:Bric;font-weight:600;font-size:60px;line-height:1.05;letter-spacing:-.025em;margin:0 0 12px}
+h2{font-family:Bric;font-weight:600;font-size:30px;line-height:1.15;letter-spacing:-.02em;
+   margin:72px 0 20px;padding-top:28px;border-top:1px solid var(--border)}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:56px}
+.lede{font-size:20px;color:var(--ink-muted);max-width:62ch;margin:0 0 8px}
+.grid{display:grid;gap:16px}
+.c4{grid-template-columns:repeat(4,1fr)}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c2{grid-template-columns:repeat(2,1fr)}
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--surface);box-shadow:var(--sh-sm)}
+.sw .chip{height:96px}
+.sw .meta{padding:14px 16px}
+.sw b{font-family:Bric;font-weight:600;font-size:15px;display:block}
+.sw span{font-size:13.5px;color:var(--ink-muted);font-variant-numeric:tabular-nums}
+.ratio{display:inline-block;margin-top:6px;font-size:12.5px;font-weight:600;
+  padding:2px 9px;border-radius:999px;background:#E8F0E4;color:var(--green-ink)}
+.ratio.bad{background:#F8E4DC;color:#9A3412}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 28px;
+  border-radius:999px;font-family:Bric;font-weight:600;font-size:16px;border:none;cursor:pointer}
+.btn-p{background:var(--brand);color:var(--ink)}
+.btn-s{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-t{background:none;color:var(--brand-ink);text-decoration:underline;text-underline-offset:4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;
+  box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--brand)}
+.card h3{font-family:Bric;font-weight:600;font-size:20px;margin:6px 0 8px}
+.card p{margin:0;color:var(--ink-muted);font-size:15.5px}
+.pin{width:44px;height:44px;border-radius:999px;background:var(--brand);display:grid;place-items:center}
+.pin i{width:14px;height:14px;border-radius:999px;background:var(--surface);display:block}
+.type-row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px solid var(--border)}
+.type-row small{font-size:12.5px;color:var(--ink-muted);width:104px;flex:none;font-variant-numeric:tabular-nums}
+.bad-demo{background:var(--brand);color:#fff;padding:20px 24px;border-radius:16px;font-family:Bric;
+  font-weight:600;font-size:24px}
+.good-demo{background:var(--brand);color:var(--ink);padding:20px 24px;border-radius:16px;font-family:Bric;
+  font-weight:600;font-size:24px}
+.note{font-size:14px;color:var(--ink-muted);margin-top:10px}
+.sp{background:var(--brand);border-radius:6px;height:32px}
+.shadow-demo{background:var(--surface);border-radius:16px;height:88px;display:grid;place-items:center;
+  font-size:13.5px;color:var(--ink-muted)}
+</style></head>
+<body><div class="wrap">
+
+<h1>FAIRFÜHRER</h1>
+<p class="lede">Designtokens, Entwurf vom 17.09.2026. Orange und Grün sind aus dem Screenshot geschätzt und liegen als einzelne Tokens vor.</p>
+
+<h2>Farben</h2>
+<div class="grid c4">
+  <div class="sw"><div class="chip" style="background:#F8F6F2"></div><div class="meta"><b>Grund</b><span>#F8F6F2</span></div></div>
+  <div class="sw"><div class="chip" style="background:#FFFDFA"></div><div class="meta"><b>Fläche</b><span>#FFFDFA</span></div></div>
+  <div class="sw"><div class="chip" style="background:#222824"></div><div class="meta"><b>Text</b><span>#222824</span><span class="ratio">13.9:1</span></div></div>
+  <div class="sw"><div class="chip" style="background:#5C645D"></div><div class="meta"><b>Text gedämpft</b><span>#5C645D</span><span class="ratio">5.7:1</span></div></div>
+  <div class="sw"><div class="chip" style="background:#EF7B22"></div><div class="meta"><b>Marke</b><span>#EF7B22 · geschätzt</span><span class="ratio bad">nur Fläche</span></div></div>
+  <div class="sw"><div class="chip" style="background:#B5540C"></div><div class="meta"><b>Marke, Text</b><span>#B5540C</span><span class="ratio">4.6:1</span></div></div>
+  <div class="sw"><div class="chip" style="background:#4F8A3D"></div><div class="meta"><b>Grün</b><span>#4F8A3D · geschätzt</span><span class="ratio bad">nur Fläche</span></div></div>
+  <div class="sw"><div class="chip" style="background:#427334"></div><div class="meta"><b>Grün, Text</b><span>#427334</span><span class="ratio">5.2:1</span></div></div>
+</div>
+
+<h2>Warum auf Orange dunkler Text steht</h2>
+<div class="grid c2">
+  <div><div class="bad-demo">Weißer Text auf Orange</div><p class="note">2.79:1, durchgefallen. So macht es die heutige Seite.</p></div>
+  <div><div class="good-demo">Dunkler Text auf Orange</div><p class="note">5.39:1, bestanden. Vorschlag für alle CTAs.</p></div>
+</div>
+
+<h2>Typografie</h2>
+<div class="type-row"><small>display-xl 60</small><span style="font-family:Bric;font-weight:600;font-size:54px;letter-spacing:-.025em">Gute Geschichten</span></div>
+<div class="type-row"><small>display-l 44</small><span style="font-family:Bric;font-weight:600;font-size:40px;letter-spacing:-.02em">verdienen Gehör</span></div>
+<div class="type-row"><small>display-m 32</small><span style="font-family:Bric;font-weight:600;font-size:30px">Essen &amp; Übernachten</span></div>
+<div class="type-row"><small>body-l 20</small><span style="font-size:20px">Tippe auf einen PIN und hör in 100 Sekunden die Geschichte dahinter.</span></div>
+<div class="type-row"><small>body 17</small><span style="font-size:17px">Über 600 nachhaltige Orte am Bodensee und im Allgäu, oft erzählt von den Menschen selbst.</span></div>
+<div class="type-row"><small>body-s 15</small><span style="font-size:15px;color:var(--ink-muted)">Bricolage Grotesque für Headlines, Source Sans 3 für Text. Beide selbst gehostet.</span></div>
+
+<h2>Buttons</h2>
+<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+  <button class="btn btn-p">Zur Karte</button>
+  <button class="btn btn-s">App laden</button>
+  <button class="btn btn-t">Aufnahmekriterien</button>
+  <div class="pin"><i></i></div>
+</div>
+<p class="note">Pillenform zitiert Play-Knopf und Kartenpin. Höhe 48 px, mobil 52 px.</p>
+
+<h2>Karten</h2>
+<div class="grid c3">
+  <div class="card"><h3>Sehenswertes</h3><p>Orte mit Geschichte, erzählt von den Menschen, die sie heute prägen.</p></div>
+  <div class="card"><h3>Einkaufen</h3><p>Kleine Läden mit Haltung, die du sonst nie gefunden hättest.</p></div>
+  <div class="card"><h3>Engagement</h3><p>Vereine, Projekte und Initiativen, die ihre Region bewegen.</p></div>
+</div>
+
+<h2>Abstände und Schatten</h2>
+<div class="grid c2">
+  <div>
+    <div style="display:flex;gap:10px;align-items:flex-end">
+      <div class="sp" style="width:4px"></div><div class="sp" style="width:8px"></div><div class="sp" style="width:12px"></div>
+      <div class="sp" style="width:16px"></div><div class="sp" style="width:24px"></div><div class="sp" style="width:32px"></div>
+      <div class="sp" style="width:48px"></div><div class="sp" style="width:64px"></div>
+    </div>
+    <p class="note">Vierer-Raster: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64</p>
+  </div>
+  <div class="grid c3" style="gap:12px">
+    <div class="shadow-demo" style="box-shadow:var(--sh-sm)">sm</div>
+    <div class="shadow-demo" style="box-shadow:var(--sh-md)">md</div>
+    <div class="shadow-demo" style="box-shadow:var(--sh-lg)">lg</div>
+  </div>
+</div>
+
+</div></body></html>
