@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens. The source of truth is docs/design-tokens.md, which records
+ * every measured contrast ratio behind these values.
+ *
+ * --brand and --accent-green are estimated from a screenshot of the live site
+ * because it is unreachable from the build environment. Replacing them with the
+ * measured values is a one-line change each; nothing else references a raw hex.
+ */
+
+@theme {
+  --color-bg: #f8f6f2;
+  --color-surface: #fffdfa;
+  --color-border: #e4dfd6;
+  --color-ink: #222824;
+  --color-ink-muted: #5c645d;
+
+  /* Brand orange carries 2.58:1 on --bg, so it is a surface colour only.
+     Text and links use --color-brand-ink, which measures 4.59:1. */
+  --color-brand: #ef7b22;
+  --color-brand-ink: #b5540c;
+  --color-brand-wash: #fdf0e4;
+
+  --color-green: #4f8a3d;
+  --color-green-ink: #427334;
+  --color-green-wash: #eaf1e6;
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 16px;
+  --radius-input: 10px;
+  --radius-image: 12px;
+
+  --shadow-sm: 0 1px 2px rgb(60 45 30 / 0.06);
+  --shadow-md: 0 4px 16px rgb(60 45 30 / 0.08);
+  --shadow-lg: 0 12px 32px rgb(60 45 30 / 0.1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/*
+ * Dark mode overrides the generated custom properties directly.
+ *
+ * `@theme` only registers a theme at the top level: nested inside a media query
+ * its declarations are emitted unconditionally, which made every visitor see the
+ * dark palette regardless of their setting. Overriding the variables `@theme`
+ * already produced is the supported way to vary them by context.
+ */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-bg: #191817;
+    --color-surface: #232120;
+    --color-border: #38342f;
+    --color-ink: #f2efe9;
+    --color-ink-muted: #a8a39a;
+    /* Brand orange reaches 6.35:1 on the dark ground, so it doubles as a text
+       colour here and the darkened variant is not needed. */
+    --color-brand-ink: #ef7b22;
+    --color-brand-wash: #2e2419;
+    --color-green-ink: #7cb567;
+    --color-green-wash: #212b1e;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Stops iOS enlarging text in landscape, which breaks the type scale. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* Removes the grey flash on tap without removing focus feedback. */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One visible focus style everywhere, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-ink);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer base {
+  /*
+   * Scroll reveal.
+   *
+   * Everything is visible by default. The hidden state applies only when motion
+   * is welcome and scripting can undo it, so a visitor who prefers reduced
+   * motion, or whose JavaScript never runs, reads a complete page rather than an
+   * empty one. The observer in components/Reveal.tsx sets data-visible.
+   */
+  @media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .reveal[data-visible="true"] {
+      opacity: 1;
+      transform: none;
+      transition:
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+  }
+}
+
+@layer utilities {
+  .section {
+    padding-block: 64px;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 112px;
+    }
+  }
+
+  .shell {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 32px;
+    }
+  }
 }
